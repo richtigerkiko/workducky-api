@@ -4,7 +4,7 @@ WORKDIR /app
 # Copy csproj and restore as distinct layers
 COPY /WorkDuckyApi/*.csproj ./WorkDuckyApi
 COPY /WorkduckyLib/*.csproj ./WorkduckyLib
-RUN dotnet restore
+RUN cd /app/WorkDuckyApi && dotnet restore
 
 # Copy everything else and build
 COPY /WorkDuckyApi ./WorkDuckyApi
