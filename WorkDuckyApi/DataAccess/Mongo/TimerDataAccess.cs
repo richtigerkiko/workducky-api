@@ -124,13 +124,12 @@ namespace WorkDuckyAPI.DataAccess.Mongo
             }
         }
 
-        public List<Timer> GetTimers(int year, int week)
+        public async Task<List<Timer>> GetTimersAsync(string uid, int year, int week)
         {
             var rule = WeekYearRules.Iso;
             var timerList = new List<Timer>();
-            timerCollection.Find(x => x.Year == year && x.WeekNumber == week)
-                           .ToList()
-                           .ForEach(x => timerList.Add(x));
+            var findings = await timerCollection.FindAsync(x => x.UserRef == uid && x.Year == year && x.WeekNumber == week);
+            findings.ToList().ForEach(x => timerList.Add(x));
             return timerList;
         }
 

@@ -127,7 +127,7 @@ namespace WorkDuckyAPI.Service
             db.SetCurrentWorkBreak(request.TimerId, workBreak);
         }
 
-        public WeekOverviewResponse GetWeekOverview(int year, int week)
+        public async Task<WeekOverviewResponse> GetWeekOverview(User user, int year, int week)
         {
             var now = LocalDate.FromDateTime(DateTime.Now);
             if (year == 0)
@@ -143,7 +143,7 @@ namespace WorkDuckyAPI.Service
             var db = new TimerDataAccess(config, logger);
 
             var weekOverviewResponse = new WeekOverviewResponse();
-            weekOverviewResponse.TimerList = db.GetTimers(year, week);
+            weekOverviewResponse.TimerList = await db.GetTimersAsync(user.Uid, year, week);
             return weekOverviewResponse;
         }
         public OverTimeResult CalculateOvertime(User user)
