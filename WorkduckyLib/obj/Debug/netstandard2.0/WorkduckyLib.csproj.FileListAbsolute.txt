@@ -1,9 +1,0 @@
-C:\Temp\dev\worktimeduck\workducky-api\WorkduckyLib\bin\Debug\netstandard2.0\WorkduckyLib.deps.json
-C:\Temp\dev\worktimeduck\workducky-api\WorkduckyLib\bin\Debug\netstandard2.0\WorkduckyLib.dll
-C:\Temp\dev\worktimeduck\workducky-api\WorkduckyLib\bin\Debug\netstandard2.0\WorkduckyLib.pdb
-C:\Temp\dev\worktimeduck\workducky-api\WorkduckyLib\obj\Debug\netstandard2.0\WorkduckyLib.csprojAssemblyReference.cache
-C:\Temp\dev\worktimeduck\workducky-api\WorkduckyLib\obj\Debug\netstandard2.0\WorkduckyLib.csproj.CoreCompileInputs.cache
-C:\Temp\dev\worktimeduck\workducky-api\WorkduckyLib\obj\Debug\netstandard2.0\WorkduckyLib.AssemblyInfoInputs.cache
-C:\Temp\dev\worktimeduck\workducky-api\WorkduckyLib\obj\Debug\netstandard2.0\WorkduckyLib.AssemblyInfo.cs
-C:\Temp\dev\worktimeduck\workducky-api\WorkduckyLib\obj\Debug\netstandard2.0\WorkduckyLib.dll
-C:\Temp\dev\worktimeduck\workducky-api\WorkduckyLib\obj\Debug\netstandard2.0\WorkduckyLib.pdb
