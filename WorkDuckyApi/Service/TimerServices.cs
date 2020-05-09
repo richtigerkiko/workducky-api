@@ -10,6 +10,10 @@ using WorkduckyLib.Interfaces;
 using NodaTime;
 using System.Linq;
 using NodaTime.Calendars;
+using System.Threading.Tasks;
+using System.IO;
+using WorkDuckyAPI.Factory;
+using System.Runtime.CompilerServices;
 
 namespace WorkDuckyAPI.Service
 {
@@ -145,7 +149,7 @@ namespace WorkDuckyAPI.Service
         public OverTimeResult CalculateOvertime(User user)
         {
             var db = new TimerDataAccess(config, logger);
-            var timers = db.GetAllUserTimersOfYear(user.Uid, DateTime.UtcNow.Year);
+            var timers = db.GetAllUserTimersOfYear(user.Uid, DateTime.UtcNow.Year).Result;
             var timerDic = SortTimersByWeek(timers);
             var timeWorkedPerWeek = new Dictionary<int, Duration>();
             var currentWeek = WeekYearRules.Iso.GetWeekOfWeekYear(LocalDate.FromDateTime(DateTime.Now));
@@ -182,6 +186,13 @@ namespace WorkDuckyAPI.Service
                 OverTime = overTime
             };
             return response;
+        }
+
+        public async Task<FileExportResponse> GenerateExportFileAsync(User user, ExportTimerRequest request)
+        {
+            var factory = new ExportTimerFactory(config, logger);
+            var stream = await factory.CreateFileStream(user, request);
+            return stream;
         }
 
         public Dictionary<int, List<Timer>> SortTimersByWeek(List<Timer> timers)

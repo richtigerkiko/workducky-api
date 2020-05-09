@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
-using NodaTime;
 using NodaTime.Calendars;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using WorkduckyLib.DataObjects;
 using WorkduckyLib.DataObjects.dbo.Mongo;
 using WorkduckyLib.DataObjects.RequestObjects;
@@ -22,8 +22,8 @@ namespace WorkDuckyAPI.DataAccess.Mongo
 
         public TimerDataAccess(IConfiguration configuration, ILogger logger) : base(configuration, logger)
         {
-            if(configuration != null)timerCollection = db.GetCollection<TimerDocument>("timers");
-            if(logger != null) this.logger = logger;
+            if (configuration != null) timerCollection = db.GetCollection<TimerDocument>("timers");
+            if (logger != null) this.logger = logger;
         }
 
         public TimerResponse WriteStartTimerToDb(Timer timer, IUser user)
@@ -134,12 +134,11 @@ namespace WorkDuckyAPI.DataAccess.Mongo
             return timerList;
         }
 
-        public List<Timer> GetAllUserTimersOfYear(string uid, int year)
+        public async Task<List<Timer>> GetAllUserTimersOfYear(string uid, int year)
         {
             var timerList = new List<Timer>();
-            timerCollection.Find(x => x.Year == year && x.UserRef == uid)
-                           .ToList()
-                           .ForEach(x => timerList.Add(x));
+            var collection = await timerCollection.FindAsync(x => x.Year == year && x.UserRef == uid);
+            collection.ToList().ForEach(x => timerList.Add(x));
             return timerList;
         }
     }

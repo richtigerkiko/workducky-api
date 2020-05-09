@@ -11,6 +11,9 @@ using NodaTime.Serialization.JsonNet;
 using NodaTime;
 using NodaTime.Text;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using MimeKit.Cryptography;
+using MimeKit;
 
 namespace WorkDuckyAPI.Controllers
 {
@@ -156,6 +159,15 @@ namespace WorkDuckyAPI.Controllers
             {
                 return ErrorResult(ex);
             }
+        }
+
+        [HttpPost("Export")]
+        public async Task<IActionResult> ExportTimer(ExportTimerRequest request)
+        {
+            var user = Authenticate();
+            var timerServices = new TimerServices(config, logger);
+            var response = await timerServices.GenerateExportFileAsync(user, request);
+            return File(response.FileStream, response.MimeType);
         }
 
         [HttpGet("GetOverTime")]
