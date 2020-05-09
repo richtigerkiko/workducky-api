@@ -24,7 +24,7 @@ namespace WorkDuckyApi.Factory
         {
             switch (request)
             {
-                case UserLoginEmailPasswordRequest userLoginEmailPassword:
+                case UserLoginEmailPasswordRequest _:
                     var action = new LoginUserEmailPassword(config, logger);
                     return await action.LoginAsync(request);
 
