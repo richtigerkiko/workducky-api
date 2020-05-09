@@ -146,13 +146,13 @@ namespace WorkDuckyAPI.Controllers
         }
 
         [HttpGet("GetWeekOverview")]
-        public IActionResult GetWeekOverview(int year, int week)
+        public async Task<IActionResult> GetWeekOverview(int year, int week)
         {
             try
             {
                 var user = Authenticate();
                 var timerServices = new TimerServices(config, logger);
-                var response = timerServices.GetWeekOverview(year, week);
+                var response = await timerServices.GetWeekOverview(user, year, week);
                 return new JsonResult(response);
             }
             catch (Exception ex)
