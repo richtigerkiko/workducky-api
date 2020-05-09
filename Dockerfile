@@ -1,22 +1,19 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
 
-# Copy csproj and restore as distinct layers
-RUN mkdir WorkDuckyAPI
-RUN mkdir WorkduckyLib
-COPY /WorkDuckyApi/*.csproj ./WorkDuckyAPI
-COPY /WorkduckyLib/*.csproj ./WorkduckyLib
-RUN ls /app 
-RUN dotnet restore ./WorkDuckyAPI/*.csproj
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+WORKDIR /src
+COPY ["WorkDuckyApi/WorkDuckyAPI.csproj", "WorkDuckyApi/"]
+COPY ["WorkduckyLib/WorkduckyLib.csproj", "WorkduckyLib/"]
+RUN dotnet restore "WorkDuckyApi/WorkDuckyAPI.csproj"
+COPY . .
+WORKDIR "/src/WorkDuckyApi"
+RUN dotnet build "WorkDuckyAPI.csproj" -c Release -o /app/build
 
-# Copy everything else and build
-COPY /WorkDuckyApi ./WorkDuckyApi
-COPY /WorkduckyLib ./WorkduckyLib
-WORKDIR /app/WorkDuckyApi
-RUN dotnet publish -c Release -o out
+FROM build AS publish
+RUN dotnet publish "WorkDuckyAPI.csproj" -c Release -o /app/publish
 
-# Build runtime image
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
-WORKDIR /app/WorkDuckyApi
-#COPY --from=build-env /app/out .
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "WorkDuckyAPI.dll"]
