@@ -1,0 +1,13 @@
+.vs/
+.vscode/
+bin/
+obj/
+bin/Debug/netcoreapp3.1/appsettings.json
+bin/Debug/netcoreapp3.1/WorkDuckyAPI.dll
+bin/Debug/netcoreapp3.1/WorkDuckyAPI.pdb
+obj/Debug/netcoreapp3.1/WorkDuckyAPI.dll
+obj/Debug/netcoreapp3.1/WorkDuckyAPI.pdb
+WorkduckyTest/bin
+WorkduckyTest/obj
+*/bin
+*/obj
