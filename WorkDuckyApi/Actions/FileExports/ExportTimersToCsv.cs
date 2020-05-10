@@ -40,7 +40,7 @@ namespace WorkDuckyAPI.Actions.FileExports
                 var csv = "TimerId;TimerType;Date;FromTime;ToTime;TotalWorkDuration;TotalBreakDuration;Rating;Notes;" + Environment.NewLine;
                 foreach (var timer in timers)
                 {
-                    csv += string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};", 
+                    csv += string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};", 
                         timer.TimerId, 
                         timer.TimerType.ToString(),
                         timer.StartTimer.Time.Date.ToString("d", null), 
@@ -49,8 +49,8 @@ namespace WorkDuckyAPI.Actions.FileExports
                         timer.TotalDurationWorked.ToString(),
                         timer.WorkBreak.TotalBreakDuration.ToString(),
                         timer.TimerReflection.Score,
-                        timer.TimerReflection.Notes,
-                        Environment.NewLine);
+                        timer.TimerReflection.Notes);
+                    csv += Environment.NewLine;
                 }
                 return csv;
             });
