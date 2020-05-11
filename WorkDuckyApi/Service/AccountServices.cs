@@ -51,8 +51,8 @@ namespace WorkDuckyAPI.Service
         {
             try
             {
-                var factory = new LoginFactory(configuration, logger);
-                return await factory.Login(request);
+                var factory = new UserFactory(configuration, logger);
+                return await factory.LoginAsync(request);
             }
             catch
             {
@@ -64,8 +64,8 @@ namespace WorkDuckyAPI.Service
         {
             try
             {
-                var factory = new RegisterFactory(configuration, logger);
-                await factory.RegisterUserAsync(user);
+                var factory = new UserFactory(configuration, logger);
+                await factory.RegisterAsync(user);
             }
             catch (Exception ex)
             {

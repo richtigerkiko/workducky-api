@@ -9,18 +9,18 @@ using WorkduckyLib.DataObjects.ResponseObjects;
 
 namespace WorkDuckyApi.Factory
 {
-    public class LoginFactory
+    public class UserFactory
     {
         private readonly IConfiguration config;
         private readonly ILogger logger;
 
-        public LoginFactory(IConfiguration config, ILogger logger)
+        public UserFactory(IConfiguration config, ILogger logger)
         {
             this.config = config;
             this.logger = logger;
         }
 
-        public async Task<UserLoginResponse> Login(ILoginRequest request)
+        public async Task<UserLoginResponse> LoginAsync(ILoginRequest request)
         {
             switch (request)
             {
@@ -30,6 +30,19 @@ namespace WorkDuckyApi.Factory
 
                 default:
                     throw new NotImplementedException(string.Format("Can't find Type: {0}", request.GetType().ToString()));
+            }
+        }
+
+        public async Task RegisterAsync(IRegistrationRequest request)
+        {
+            switch (request)
+            {
+                case UserRegistrationEmailPasswordRequest _:
+                    var action = new RegisterUserEmailPassword(config, logger);
+                    await action.Register(request);
+                    break;
+                default:
+                    throw new NotImplementedException("Authtype Unknown");
             }
         }
     }
