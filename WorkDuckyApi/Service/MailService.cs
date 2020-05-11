@@ -112,7 +112,7 @@ namespace WorkDuckyAPI.Service
 
         public async Task<string> ApplyMailTemplateAsync(EmailText email)
         {
-            var template = await File.ReadAllTextAsync("email.html");
+            var template = await File.ReadAllTextAsync("Templates/email.html");
             template = Regex.Replace(template, "##TITLE", email.Title);
             template = Regex.Replace(template, "##HELLO", email.Greeting + ",");
             template = Regex.Replace(template, "##LINKURL", email.CTAURL);
