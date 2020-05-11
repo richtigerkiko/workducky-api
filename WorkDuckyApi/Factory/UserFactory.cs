@@ -39,7 +39,7 @@ namespace WorkDuckyApi.Factory
             {
                 case UserRegistrationEmailPasswordRequest _:
                     var action = new RegisterUserEmailPassword(config, logger);
-                    await action.Register(request);
+                    await action.RegisterAsync(request);
                     break;
                 default:
                     throw new NotImplementedException("Authtype Unknown");

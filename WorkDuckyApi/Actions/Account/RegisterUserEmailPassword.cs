@@ -19,7 +19,7 @@ namespace WorkDuckyApi.Actions.Account
             this.logger = logger;
         }
 
-        public async Task Register(IRegistrationRequest request)
+        public async Task RegisterAsync(IRegistrationRequest request)
         {
             var db = new AccountDataAccess(config, logger);
             try

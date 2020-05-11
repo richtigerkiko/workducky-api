@@ -5,6 +5,6 @@ namespace WorkDuckyApi.Actions.Account
 {
     public interface IRegisterUser
     {
-        Task Register(IRegistrationRequest request);
+        Task RegisterAsync(IRegistrationRequest request);
     }
 }
