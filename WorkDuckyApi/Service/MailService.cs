@@ -38,6 +38,8 @@ namespace WorkDuckyAPI.Service
         public async Task SendMailMessageAsync(MimeMessage message)
         {
             try {
+                message.From.Add(new MailboxAddress("Workducky", "workducky@fadr.de"));
+
                 using (var client = new SmtpClient())
                 {
                     client.Connect(configuration.Server, configuration.Port, configuration.UseSSL);
