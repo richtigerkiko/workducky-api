@@ -67,7 +67,7 @@ namespace WorkDuckyAPI.Service
             };
             timer.TimerState = TimerState.Stopped;
 
-            timer.TotalDurationWorked = (timer.EndTimer.Time - timer.StartTimer.Time);
+            timer.TotalDurationWorked = (timer.EndTimer.Time - timer.StartTimer.Time - timer.WorkBreak.TotalBreakDuration);
 
             var response = db.StopTimer(timer);
 
