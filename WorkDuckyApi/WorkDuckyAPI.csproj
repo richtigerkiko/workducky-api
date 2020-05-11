@@ -20,4 +20,9 @@
   <ItemGroup>
     <ProjectReference Include="..\WorkduckyLib\WorkduckyLib.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Templates\email.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
